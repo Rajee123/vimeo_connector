@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns="http://ws.apache.org/ns/synapse" name="getChannel">
+
+	<parameter name="channel_id" description="id of the channel" />
+
+    <sequence>
+        <property name="HTTP_METHOD" value="GET" scope="axis2" type="STRING"/>
+        <property name="Accept-Encoding" scope="transport" action="remove"/>
+        <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+
+	<property name="uri.var.channel_id" expression="$func:channel_id" />
+
+
+        <payloadFactory media-type="xml">
+            <format>
+                <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+                    <soapenv:Header/>
+                    <soapenv:Body/>
+                </soapenv:Envelope>
+            </format>
+            <args/>
+        </payloadFactory>
+        
+        <call>
+            <endpoint>
+                <http method="GET"
+                      uri-template="{uri.var.vimeo.apiUrl}/channels/{uri.var.channel_id}?access_token={uri.var.vimeo.accessToken}" />
+            </endpoint>
+        </call>
+    </sequence>
+</template>
+
+
+
+
+

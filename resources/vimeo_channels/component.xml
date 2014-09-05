@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="vimeo_channels" type="synapse/template">
+    <subComponents>
+        <component name="getChannels">
+            <file>getChannels.xml</file>
+            <description>Returns List of all Channels</description>
+        </component>
+	<component name="getChannel">
+            <file>getChannel.xml</file>
+            <description>Returns a Channel</description>
+        </component>
+	<component name="getUsersRelatedToChannel">
+            <file>getUsersRelatedToChannel.xml</file>
+            <description>Returns a list of users related to a channel</description>
+        </component>
+	<component name="getVideosRelatedToChannel">
+            <file>getVideosRelatedToChannel.xml</file>
+            <description>Returns a list of videos related to a channel</description>
+        </component>
+	<component name="createChannel">
+            <file>createChannel.xml</file>
+            <description>Create a new Channel</description>
+        </component>
+	<component name="deleteChannel">
+            <file>deleteChannel.xml</file>
+            <description>Delete a Channel</description>
+        </component>
+	<component name="editChannel">
+            <file>editChannel.xml</file>
+            <description>Edit a Channel's information</description>
+        </component>
+	<component name="addVideoToChannel">
+            <file>addVideoToChannel.xml</file>
+            <description>Add a video to a Channel</description>
+        </component>
+	<component name="removeVideoFromChannel">
+            <file>removeVideoFromChannel.xml</file>
+            <description>Remove a video from a Channel</description>
+        </component>
+	
+    </subComponents>
+</component>

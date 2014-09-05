@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns="http://ws.apache.org/ns/synapse" name="editChannel" >
+
+    <parameter name="channel_id" description="id of the channel" />
+    <parameter name="name" description="The name of the Channel" />
+    <parameter name="description" description="The description of the Channel" />
+    <parameter name="privacy" description="The privacy level of the Channel" />
+
+
+    <sequence>
+	<property name="HTTP_METHOD" value="PATCH" scope="axis2" type="STRING"/>
+        <property name="Accept-Encoding" scope="transport" action="remove"/>
+        <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+
+	<property name="uri.var.channel_id" expression="$func:channel_id" />
+        <property name="uri.var.name" expression="$func:name" />
+        <property name="uri.var.description" expression="$func:description" />
+	<property name="uri.var.privacy" expression="$func:privacy" />
+
+
+        <payloadFactory media-type="json">
+            <format> {
+                "name": "$1",
+                "description":"$2",
+		"privacy":"$3"
+                }
+            </format>
+            <args>
+                <arg evaluator="xml" expression="$func:name"/>
+                <arg evaluator="xml" expression="$func:description"/>
+		<arg evaluator="xml" expression="$func:privacy"/>
+            </args>
+        </payloadFactory>
+     
+        <call>
+            <endpoint>
+                <http method="PATCH"
+                      uri-template="{uri.var.vimeo.apiUrl}/channels/{uri.var.channel_id}?access_token={uri.var.vimeo.accessToken}" />
+            </endpoint>
+        </call>
+
+    </sequence>
+
+</template>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns="http://ws.apache.org/ns/synapse" name="removeVideoFromChannel" >
+
+     	<parameter name="channel_id" description="The id of the Channel" />
+	<parameter name="video_id" description="The id of the Video" />
+
+
+    <sequence>
+	<property name="HTTP_METHOD" value="DELETE" scope="axis2" type="STRING"/>
+        <property name="Accept-Encoding" scope="transport" action="remove"/>
+        <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+
+        <property name="uri.var.channel_id" expression="$func:channel_id" />
+        <property name="uri.var.video_id" expression="$func:video_id" />
+
+
+        <payloadFactory media-type="json">
+            <format>
+                <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+                    <soapenv:Header/>
+                    <soapenv:Body/>
+                </soapenv:Envelope>
+            </format>
+            <args/>
+        </payloadFactory>
+     
+        <call>
+            <endpoint>
+                <http method="DELETE"
+                      uri-template="{uri.var.vimeo.apiUrl}/channels/{uri.var.channel_id}/videos/{uri.var.video_id}?access_token={uri.var.vimeo.accessToken}" />
+            </endpoint>
+        </call>
+
+    </sequence>
+
+</template>
